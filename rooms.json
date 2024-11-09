@@ -1,0 +1,14 @@
+[
+  {
+    "number": "200",
+    "area": "45",
+    "price": "120",
+    "description": "Room with seaview"
+  },
+  {
+    "number": "300",
+    "area": "32",
+    "price": "135",
+    "description": "A beautiful room."
+  }
+]

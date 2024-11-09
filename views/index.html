@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Room Management</title>
+</head>
+<body>
+<h2>Room Management</h2>
+<form action="/add-room" method="POST">
+  <input type="text" name="number" placeholder="Room Number" required><br>
+  <input type="text" name="area" placeholder="Room Area (sq mt)" required><br>
+  <input type="text" name="price" placeholder="Room Price (€)" required><br>
+  <textarea name="description" placeholder="Room Description" required></textarea><br>
+  <button type="submit">Add Room</button>
+</form>
+<hr>
+<h3>All Rooms</h3>
+<div id="room-list"></div>
+<script>
+  async function fetchRooms() {
+    const response = await fetch('/rooms');
+    const rooms = await response.json();
+    const roomList = document.getElementById('room-list');
+    roomList.innerHTML = rooms.map(room => `
+      <div>
+        <p><strong>Number:</strong> ${room.number}, <strong>Area:</strong> ${room.area}, <strong>Price:</strong> €${room.price}</p>
+        <p>${room.description}</p>
+        <form action="/delete-room/${room.number}" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+      <hr>
+    `).join('');
+  }
+  fetchRooms();
+</script>
+</body>
+</html>
